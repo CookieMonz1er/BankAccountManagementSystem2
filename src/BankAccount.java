@@ -51,15 +51,20 @@ public class BankAccount {
 
 
     public void addTransaction(String record) {
-        transactionHistory[count] = record;
-        count++;
+        if(record == null) return;
 
-        if (count == transactionHistory.length) {
-            for (int i = 0; i < count - 1; i++) {
-                transactionHistory[i] = transactionHistory[i + 1];
-            }
-            transactionHistory[count - 1] = record;
+        if(count < transactionHistory.length){
+            transactionHistory[count] = record;
+            count++;
         }
+        else{
+            for(int i = 0; i < transactionHistory.length-1; i++){
+                transactionHistory[i] = transactionHistory[i+1];
+            }
+            transactionHistory[transactionHistory.length-1] = record;
+        }
+
+
 
     }
 
@@ -87,5 +92,13 @@ public class BankAccount {
 
     public void displayAccountInfo(){
         System.out.println("(" + ownerName + ", " + iban + ", " + balance + ")");
+    }
+
+    public void displayHistory(){
+        if(count == 0) System.out.println("No transactions");
+
+        for(int i = 0; i < count; i++){
+            System.out.println(transactionHistory[i]);
+        }
     }
 }

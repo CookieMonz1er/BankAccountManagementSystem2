@@ -6,6 +6,8 @@ public class BankAccount {
     private int count;
     private String[] transactionHistory;
 
+
+
     public BankAccount(String ownerName, long iban) {
         this.ownerName = ownerName;
         this.iban = iban;
@@ -68,7 +70,7 @@ public class BankAccount {
 
     }
 
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         balance += amount;
         addTransaction("DEPOSIT: " + amount);
     }
@@ -81,7 +83,7 @@ public class BankAccount {
         addTransaction("WITHDRAW: " + amount);
     }
 
-    public void transferTo(long iban, BankAccount receiver, int amount){
+    public void transferTo(long iban, BankAccount receiver, double amount){
         if(receiver.getIban() == iban && amount <= this.getBalance()){
             balance -= amount;
             receiver.setBalance(receiver.getBalance()+amount);
